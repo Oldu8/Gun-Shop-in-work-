@@ -1,24 +1,19 @@
 import React from "react";
 import reactDom from "react-dom";
+// import products from "./data";
+import Header from "./components/header/header";
+import SearchPanel from "./components/serch-panel/search-panel";
+import ItemList from "./components/item-list/item-list";
+import "./index.css"
 
-const app = (
-  <div>
-    <h1>Welcome to gun shop</h1>
-    <ul>
-        <li>
-          Kalashnikov AK-47
-        </li>
-        <li>
-          Mauser Gewehr 98
-        </li>
-        <li>
-          Mosin–Nagant
-        </li>
-        <li>
-          M16
-        </li>
-    </ul>
-  </div>
-);
 
-reactDom.render(app, document.getElementById('root'))
+const App = () => {
+  return (
+    <div>
+      <Header/>
+      <SearchPanel/>
+      <ItemList/>
+    </div>
+  )
+}
+reactDom.render(<App/>, document.getElementById('root'))
