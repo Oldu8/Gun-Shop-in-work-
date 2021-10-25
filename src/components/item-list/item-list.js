@@ -1,5 +1,5 @@
 import React from "react";
-import reactDom from "react-dom";
+// import reactDom from "react-dom";
 import Item from "../item/";
 import "./item-list.css"
 

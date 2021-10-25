@@ -1,6 +1,5 @@
 import React from "react";
-import reactDom from "react-dom";
-import products from "../../data";
+// import reactDom from "react-dom";
 import BuyButton from "../buy-button/";
 import "./item.css"
 

@@ -1,17 +1,17 @@
 import React from "react";
-import reactDom from "react-dom";
+// import reactDom from "react-dom";
 import products from "../../data";
 import Header from "../header/";
-import SearchPanel from "../serch-panel/";
 import ItemList from "../item-list/";
 import "./app.css"
+import FilterPanel from "../filter-panel";
 
 
 const App = () => {
   return (
     <div>
       <Header/>
-      <SearchPanel/>
+      <FilterPanel/>
       <ItemList products={products}/>
     </div>
   )
