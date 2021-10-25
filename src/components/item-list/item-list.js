@@ -3,12 +3,23 @@ import reactDom from "react-dom";
 import Item from "../item/item";
 import "./item-list.css"
 
-const ItemList = () => {
+const ItemList = ({products}) => {
+    const elements = products.map((item) => {
+        return (
+            <li>
+                <Item 
+                    name={item.name}
+                    category={item.category}
+                    price={item.price}
+                />
+            </li>
+        )
+    })
+
+
     return(
           <ul className="catalog">
-              <li><Item idx="0"/></li>
-              <li><Item idx="1"/></li>
-              <li><Item idx="2"/></li>
+              {elements}
         </ul>
     )
 }

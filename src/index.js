@@ -5,6 +5,7 @@ import Header from "./components/header/header";
 import SearchPanel from "./components/serch-panel/search-panel";
 import ItemList from "./components/item-list/item-list";
 import "./index.css"
+import products from "./data";
 
 
 const App = () => {
@@ -12,7 +13,7 @@ const App = () => {
     <div>
       <Header/>
       <SearchPanel/>
-      <ItemList/>
+      <ItemList products={products}/>
     </div>
   )
 }
