@@ -1,7 +1,7 @@
 import React from "react";
 import reactDom from "react-dom";
 import products from "../../data";
-import BuyButton from "../buy-button/buy-button";
+import BuyButton from "../buy-button/";
 import "./item.css"
 
 const Item = ( { name, category, price } ) => {
