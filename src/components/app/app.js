@@ -40,20 +40,76 @@ export default class App extends React.Component {
           expensive: false
         })
       }
+      if (method === 'by ascending'){
+        this.setState({
+          descending: false,
+          ascending: true,
+          byDefault: false,
+          cheapest: false,
+          expensive: false
+        })
+      }
+      if (method === 'the cheapest'){
+        this.setState({
+          descending: false,
+          ascending: false,
+          byDefault: false,
+          cheapest: true,
+          expensive: false
+        })
+      }
+      if (method === 'most expensive'){
+        this.setState({
+          descending: false,
+          ascending: false,
+          byDefault: false,
+          cheapest: false,
+          expensive: true
+        })
+      }
+    }
+
+    let productArr = products;
+
+    const sortDescending = (arr) => {
+      arr.sort((a,b) => a.price - b.price )
+    }
+
+    const sortAscending = (arr) => {
+      arr.sort((a,b) => b.price - a.price )
+    }
+
+    const sortDefault = (arr) => {
+      arr.sort((a,b) => a.id - b.id )
     }
 
     if(byDefault) {
-        console.log('filtred by default')
+      sortDefault(productArr)
     }
     if(descending) {
-      console.log('filtred by descending')
-  }
+      sortDescending(productArr);
+    }
+    if(ascending) {
+      sortAscending(productArr);
+    }
+    if(cheapest) {
+      console.log('filtred by cheapest');
+      sortDescending(productArr);
+      let cheapestItem = productArr[0];
+      console.log(cheapestItem)
+    }
+    if(expensive) {
+      console.log('filtred by expensive')
+      sortAscending(productArr);
+      let expensiveItem = productArr[0];
+      console.log(expensiveItem)
+    }
 
     return (
       <div>
         <Header/>
-        <FilterPanel sortElements={(methodOfSorting )=> sortElements(methodOfSorting)}/>
-        <ItemList products={products}/>
+        <FilterPanel sortElements={(method)=> sortElements(method)}/>
+        <ItemList products={productArr}/>
       </div>
     )
   }
