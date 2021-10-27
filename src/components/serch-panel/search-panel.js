@@ -1,9 +1,8 @@
 import React from "react";
-// import reactDom from "react-dom";
-
+import "./search-panel.css"
 const SearchPanel =()=> {
     return (
-      <input placeholder="search"></input>
+      <input placeholder="Type here to search guns" className="search__panel"></input>
     )
   }
 

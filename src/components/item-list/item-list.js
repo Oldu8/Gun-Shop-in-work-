@@ -15,8 +15,6 @@ const ItemList = ({products}) => {
             </li>
         )
     })
-
-
     return(
           <ul className="catalog">
               {elements}
