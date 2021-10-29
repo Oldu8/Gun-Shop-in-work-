@@ -3,8 +3,8 @@ import SearchPanel from "../serch-panel";
 import SortingButtons from "../sorting-buttons"
 import "./filter-panel.css"
 
-const FilterPanel = ( {sortElements} ) =>{ 
-    const arrWithButtons = ['by descending', 'by ascending', 'by default', 'the cheapest','most expensive'];
+const FilterPanel = ( {sortElements, changeOnSearch } ) =>{ 
+    const arrWithButtons = ['by descending', 'by ascending', 'by default'];
     let uniqeKey = 0;
 
     const buttonsToSort = arrWithButtons.map((item) => {
@@ -20,7 +20,8 @@ const FilterPanel = ( {sortElements} ) =>{
     return(
     <div className="filter__block">
         <div className='wrapper' >
-            <SearchPanel/>
+            <SearchPanel 
+                changeOnSearch = {(term)=> changeOnSearch(term)}/>
             <div className="sorting_buttons__block">
                 {buttonsToSort}
             </div>
