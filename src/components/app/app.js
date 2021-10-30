@@ -5,8 +5,6 @@ import Header from "../header/";
 import ItemList from "../item-list/";
 import "./app.css"
 import FilterPanel from "../filter-panel";
-// import { render } from "@testing-library/react";
-
 
 export default class App extends React.Component {
 
@@ -17,7 +15,8 @@ export default class App extends React.Component {
       byDefault: true,
     },
     term: '',
-}
+  }
+
   render() {
     const {descending, ascending, byDefault} = this.state;
     const {term} = this.state;
@@ -92,17 +91,19 @@ export default class App extends React.Component {
     })
   };
 
-    const searchedItems = search(productArr, term);
+  const searchedItems = search(productArr, term);
 
     // return block
-
-
     return (
       <div>
         <Header/>
-        <FilterPanel sortElements={(method)=> sortItems(method)}
-                     changeOnSearch={(term) => changeOnSearch(term)}/>
-        <ItemList products={searchedItems}/>
+        <FilterPanel 
+          sortElements={(method)=> sortItems(method)}
+          changeOnSearch={(term) => changeOnSearch(term)}
+        />
+        <ItemList 
+          products={searchedItems}
+        />
       </div>
     )
   }

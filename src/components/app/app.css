@@ -1,5 +1,6 @@
 body {
-    background-color: rgb(228, 222, 222);
+    background: linear-gradient(to bottom, #91EAE4, #86A8E7, #7575b1);
+    height: 100%;
 }
 
 .wrap {
