@@ -5,6 +5,7 @@ import Header from "../header/";
 import ItemList from "../item-list/";
 import "./app.css"
 import FilterPanel from "../filter-panel";
+import ModalBuyWindow from "../modal-buy-window/modal-buy-window";
 
 export default class App extends React.Component {
 
@@ -15,11 +16,13 @@ export default class App extends React.Component {
       byDefault: true,
     },
     term: '',
+    modalBuyWindow: false,
+    chosenItemForModalBuyWindow: {}
   }
 
   render() {
     const {descending, ascending, byDefault} = this.state;
-    const {term} = this.state;
+    const {term, modalBuyWindow,chosenItemForModalBuyWindow} = this.state;
     
     let productArr = [ ...products];
 
@@ -93,6 +96,15 @@ export default class App extends React.Component {
 
   const searchedItems = search(productArr, term);
 
+    //Modal Buy window
+    const createModalBuyWindow = (id) => {
+      console.log(id);
+      const chosenItem = products.find(item => item.id === id);
+      this.setState({
+        modalBuyWindow: true,
+        chosenItemForModalBuyWindow: chosenItem,
+      })
+    } 
     // return block
     return (
       <div>
@@ -103,7 +115,11 @@ export default class App extends React.Component {
         />
         <ItemList 
           products={searchedItems}
+          createModalBuyWindow ={(id) => createModalBuyWindow(id)}
         />
+        <ModalBuyWindow 
+          statusModalBuyWindow={ modalBuyWindow }
+          chosenItem = { chosenItemForModalBuyWindow }/>
       </div>
     )
   }
