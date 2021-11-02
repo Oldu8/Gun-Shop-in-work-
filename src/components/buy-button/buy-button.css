@@ -1,17 +1,17 @@
 .btn {
-    background-color: #30b465;
-    color: rgb(246, 242, 246);
-    font-size: 15px;
-    font-weight: 400;
-    border-radius: 25%;
-    text-align: center;
+  background-color: #30b465;
+  color: rgb(246, 242, 246);
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 25%;
+  text-align: center;
 }
 
 .buy__btn {
-    width: 60px;
-    height: 60px;
-    padding: 1px 4px;
-    position: relative;
-    left: 0;
-    top: 70%;
+  width: 60px;
+  height: 60px;
+  padding: 1px 4px;
+  position: relative;
+  left: 0;
+  top: 70%;
 }

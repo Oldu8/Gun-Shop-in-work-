@@ -1,3 +1,3 @@
-import FilterPanel from './filter-panel'
+import FilterPanel from "./filter-panel";
 
-export default FilterPanel
+export default FilterPanel;

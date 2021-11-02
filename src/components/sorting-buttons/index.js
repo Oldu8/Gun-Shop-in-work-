@@ -1,2 +1,2 @@
 import SortingButtons from "./sorting-buttons";
-export default SortingButtons
+export default SortingButtons;

@@ -1,2 +1,2 @@
 import BuyButton from "./buy-button";
-export default BuyButton
+export default BuyButton;
