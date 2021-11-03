@@ -7,73 +7,36 @@ import "./app.css";
 import FilterPanel from "../filter-panel";
 import ModalBuyWindow from "../modal-buy-window/modal-buy-window";
 
+const sortByParams = (arr, field, type) => {
+  return type === "asc"
+    ? [...arr].sort((a, b) => b[field] - a[field])
+    : [...arr].sort((a, b) => a[field] - b[field]);
+};
+
 export default class App extends React.Component {
   state = {
-    filterStatus: {
-      descending: false,
-      ascending: false,
-      byDefault: true,
-    },
+    filterStatus: "",
     term: "",
     modalBuyWindow: false,
     chosenItemForModalBuyWindow: {},
   };
 
+  sortItems = (method) => {
+    this.setState({
+      filterStatus: method,
+    });
+  };
+
   render() {
-    const { descending, ascending, byDefault } = this.state;
-    const { term, modalBuyWindow, chosenItemForModalBuyWindow } = this.state;
+    const { filterStatus, term, modalBuyWindow, chosenItemForModalBuyWindow } =
+      this.state;
 
     let productArr = [...products];
 
     // Sort block
-
-    const sortItems = (method) => {
-      if (method === "by descending") {
-        this.setState({
-          descending: true,
-          ascending: false,
-          byDefault: false,
-        });
-      }
-
-      if (method === "by default") {
-        this.setState({
-          descending: false,
-          ascending: false,
-          byDefault: true,
-        });
-      }
-
-      if (method === "by ascending") {
-        this.setState({
-          descending: false,
-          ascending: true,
-          byDefault: false,
-        });
-      }
-    };
-
-    const sortDescending = (arr) => {
-      arr.sort((a, b) => a.price - b.price);
-    };
-
-    const sortAscending = (arr) => {
-      arr.sort((a, b) => b.price - a.price);
-    };
-
-    const sortDefault = (arr) => {
-      arr.sort((a, b) => a.id - b.id);
-    };
-
-    if (byDefault) {
-      sortDefault(productArr);
-    }
-    if (descending) {
-      sortDescending(productArr);
-    }
-    if (ascending) {
-      sortAscending(productArr);
-    }
+    const filtredProductArr = !!filterStatus
+      ? sortByParams(productArr, "price", filterStatus)
+      : sortByParams(productArr, "id");
 
     // Search block
     const changeOnSearch = (term) => {
@@ -92,7 +55,7 @@ export default class App extends React.Component {
       });
     };
 
-    const searchedItems = search(productArr, term);
+    const searchedItems = search(filtredProductArr, term);
 
     //Modal Buy window
     const createModalBuyWindow = (id) => {
@@ -103,12 +66,13 @@ export default class App extends React.Component {
         chosenItemForModalBuyWindow: chosenItem,
       });
     };
+
     // return block
     return (
       <div>
         <Header />
         <FilterPanel
-          sortElements={(method) => sortItems(method)}
+          sortElements={this.sortItems}
           changeOnSearch={(term) => changeOnSearch(term)}
         />
         <ItemList

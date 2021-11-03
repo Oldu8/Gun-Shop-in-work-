@@ -1,0 +1,10 @@
+.cross__button {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 3%;
+  right: 7%;
+  background-image: url(../../img/delete-156119_960_720.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}

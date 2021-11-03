@@ -1,10 +1,8 @@
 import React from "react";
-// import reactDom from "react-dom";
 import "./buy-button.css";
 
 const BuyButton = ({ id, createBuyWindow }) => {
   const buyButtonClicked = () => {
-    // console.log(id)
     createBuyWindow(id);
   };
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./modal-window.css";
+import "./modal-buy-window.css";
 
 export default class ModalBuyWindow extends React.Component {
   render() {
