@@ -6,6 +6,8 @@
   background: linear-gradient(to bottom, #6ed888, #489c79, #1e7727);
   margin: 200px auto 0 auto;
   position: relative;
+  transform: scale(0.5);
+  transition: 0.5s;
 }
 
 .product__block {
@@ -88,9 +90,16 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  transform: scale(0);
+  opacity: 0;
+  transition: 0.5s;
+  pointer-events: none;
 }
 
 .modal__wrapper.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal__window.active {
   transform: scale(1);
 }

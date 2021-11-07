@@ -1,16 +1,21 @@
 import React from "react";
 import "./modal-ty-window.css";
-import CrossButton from "../cross-button";
 
-const ModalTyWindow = () => {
+const TYPage = (props) => {
+  const { isActive, setActive } = props;
   return (
-    <React.Fragment>
-      <div className="ty__window">
+    <section
+      className={isActive ? "ty__wrapper active" : "ty__wrapper"}
+      onClick={() => setActive(false)}
+    >
+      <div
+        className={isActive ? "ty__window active" : "ty__window"}
+        onClick={(e) => e.stopPropagation()}
+      >
         <h2 className="headline__ty">Thank you for your order!</h2>
       </div>
-      <CrossButton />
-    </React.Fragment>
+    </section>
   );
 };
 
-export default ModalTyWindow;
+export default TYPage;

@@ -1,2 +1,2 @@
-import ModalTyWindow from "./modal-ty-window";
-export default ModalTyWindow;
+import TYPage from "./modal-ty-window";
+export default TYPage;
