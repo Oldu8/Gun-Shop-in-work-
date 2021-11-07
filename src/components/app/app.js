@@ -5,7 +5,7 @@ import Header from "../header/";
 import ItemList from "../item-list/";
 import "./app.css";
 import FilterPanel from "../filter-panel";
-import ModalBuyWindow from "../modal-buy-window/modal-buy-window";
+import ModalBuyWindowHook from "../modal-buy-window-hook";
 
 const sortByParams = (arr, field, type) => {
   return type === "asc"
@@ -18,7 +18,7 @@ export default class App extends React.Component {
     filterStatus: "",
     term: "",
     modalBuyWindow: false,
-    chosenItemForModalBuyWindow: {},
+    ItemForModal: {},
   };
 
   sortItems = (method) => {
@@ -28,8 +28,7 @@ export default class App extends React.Component {
   };
 
   render() {
-    const { filterStatus, term, modalBuyWindow, chosenItemForModalBuyWindow } =
-      this.state;
+    const { filterStatus, term, modalBuyWindow, ItemForModal } = this.state;
 
     let productArr = [...products];
 
@@ -63,7 +62,15 @@ export default class App extends React.Component {
       const chosenItem = products.find((item) => item.id === id);
       this.setState({
         modalBuyWindow: true,
-        chosenItemForModalBuyWindow: chosenItem,
+        ItemForModal: chosenItem,
+      });
+    };
+
+    console.log(ItemForModal);
+
+    const closeModalBuyWindow = () => {
+      this.setState({
+        modalBuyWindow: false,
       });
     };
 
@@ -79,9 +86,10 @@ export default class App extends React.Component {
           products={searchedItems}
           createModalBuyWindow={(id) => createModalBuyWindow(id)}
         />
-        <ModalBuyWindow
-          statusModalBuyWindow={modalBuyWindow}
-          chosenItem={chosenItemForModalBuyWindow}
+        <ModalBuyWindowHook
+          isActive={modalBuyWindow}
+          chosenItem={ItemForModal}
+          closeModal={closeModalBuyWindow}
         />
       </div>
     );
