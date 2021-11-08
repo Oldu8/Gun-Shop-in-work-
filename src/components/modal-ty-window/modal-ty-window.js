@@ -13,6 +13,7 @@ const TYPage = (props) => {
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="headline__ty">Thank you for your order!</h2>
+        <h2 className="headline__ty"> We will call you</h2>
       </div>
     </section>
   );
