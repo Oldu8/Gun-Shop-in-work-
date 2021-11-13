@@ -2,6 +2,29 @@ import React, { useEffect, useState } from "react";
 import "./modal-buy-window-hook.css";
 import TYPage from "../modal-ty-window";
 
+const intialFormData = {
+  userName:'',
+  userPhone: '',
+}
+
+const errorText = {
+  userName:'Неверное имя',
+  userPhone: 'Некоректный номер',
+}
+
+const checkFunctions = {
+  userName: (value) => {
+    const regex = /[A-Za-z]+$/;
+    return !!(value.length <3 || value.length >8) && (regex.test(value));
+  }
+  ,
+  userPhone: (value) => {
+    const regex = /^[0-9]+$/;
+    return !!(value.length <8 || value.length >12) && (regex.test(value));
+  }
+}
+
+
 const ModalBuyWindowHook = (props) => {
   const { isActive, chosenItem, closeModal } = props;
   const { name, category, price } = { ...chosenItem };
@@ -9,64 +32,37 @@ const ModalBuyWindowHook = (props) => {
   const [isActiveTYPage, setTYActive] = useState(false);
 
   /// state for validate form
-  const [userName, setUserName] = useState('');
-  const [userPhone, setUserPhone] = useState('');
-  const [userNameDirty, setUserNameDirty] = useState(false);
-  const [userPhoneDirty, setUserPhoneDirty] = useState(false);
-  const [userNameError, setUserNameError] = useState('');
-  const [userPhoneError, setUserPhoneError] = useState('');
-  const [formValid, setFormValid] = useState(false);
-  // console.log(formValid)
 
-  useEffect(()=> {
-    if(userNameError || userPhoneError){
-      setFormValid(false)
-    } else {
-      // console.log('form valid' + formValid)
-      setFormValid(true)
-    }
-  }, [userNameError, userPhoneError])
+    const [formData, setFormData] = useState(intialFormData);
+    const [error, setError] = useState([]);
 
-  // func
-  const userNameHandler = (e) => {
-    setUserName(e.target.value);
-    const re = /[A-Za-z]+$/;
-    if (!re.test(String(e.target.value).toLowerCase())){
-      setUserNameError('Некорректный формат имени')
-    } if (e.target.value.length <3 || e.target.value.length >8) {
-      setUserNameError('Короткое или слишком длинное имя')
-    }
-     else {
-      setUserNameError('')
-    }
-  }
-  
-  const userPhoneHandler = (e) => {
-    setUserPhone(e.target.value);
-    const regex = /^[0-9]+$/;
-    if(e.target.value.length <8 || e.target.value.length >12) {
-      // console.log('количество цифр в номере:' + e.target.value.length);
-    } if (!regex.test(String(e.target.value))){
-      setUserPhoneError('Некорректный формат номера')
-    }
-    else {
-      // console.log ('number is ok')
-      setUserPhoneError('')
+    const handleChange = (event) => {
+      setError([])
+      setFormData( (state)=> {
+        return {
+          ...state, [event.target.name]:event.target.value
+        }
+      })
+    } 
+
+  const handleBlur = (event) => {
+    const {name, value} = event.target;
+    const isValid = checkFunctions[name](value);
+    if (!isValid) {
+      setError((arr) => {
+        return [...arr, name]
+      })
     }
   }
 
-  const blurHandler = (e) => {
-    switch (e.target.name) {
-      case "name":
-        setUserNameDirty(true);
-        break
-      case "phone":
-        setUserPhoneDirty(true);
-        break;
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (formData.userName && formData.userPhone && !error.length) {
+      setTYActive(true)
     }
-  };
-
+  }
   /// main return
+
   return (
     <section
       className={isActive ? "modal__wrapper active" : "modal__wrapper"}
@@ -84,40 +80,38 @@ const ModalBuyWindowHook = (props) => {
         </div>
         <div className="user__block">
           <h2 className="header__headline">To finish order enter your data:</h2>
-          <form className="input__form">
-            {(userNameDirty && userNameError) && 
-              <div className='error__input'>{userNameError}</div>
+          <form className="input__form" onSubmit={onSubmit}>
+          {(error.includes('userName')) && 
+              <div className="error__input">{errorText['userName']}</div>
             }
             <input 
-            onChange={e => userNameHandler(e)}
-              value={userName}
-              onBlur={e => blurHandler(e)}
+            onChange={handleChange}
+              value={formData.userName}
+              onBlur={handleBlur}
               type="text"
               className="name__user input__user"
               placeholder="Your name"
-              name='name'
+              name='userName'
             ></input>
-            {(userPhoneDirty && userPhoneError) && 
-              <div className="error__input">{userPhoneError}</div>
+            {(error.includes('userPhone')) && 
+              <div className="error__input">{errorText['userPhone']}</div>
             }
             <input
-              onChange={e => userPhoneHandler(e)}
-              onBlur={e => blurHandler(e)}
-              value={userPhone}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={formData.userPhone}
               type="tel"
               className="phone__user input__user"
               placeholder="Your phone"
-              name='phone'
+              name='userPhone'
             ></input>
-          </form>
-          <button
-            disabled={!formValid}
+            <button
             type="submit"
             className="order__btn btn"
-            onClick={() => setTYActive(true)}
           >
             Make order
           </button>
+          </form>
         </div>
       </div>
       <TYPage isActive={isActiveTYPage} setActive={setTYActive} />
