@@ -16,13 +16,13 @@ const ModalBuyWindowHook = (props) => {
   const [userNameError, setUserNameError] = useState('');
   const [userPhoneError, setUserPhoneError] = useState('');
   const [formValid, setFormValid] = useState(false);
-  console.log(formValid)
+  // console.log(formValid)
 
   useEffect(()=> {
     if(userNameError || userPhoneError){
       setFormValid(false)
     } else {
-      console.log('form valid' + formValid)
+      // console.log('form valid' + formValid)
       setFormValid(true)
     }
   }, [userNameError, userPhoneError])
@@ -45,12 +45,12 @@ const ModalBuyWindowHook = (props) => {
     setUserPhone(e.target.value);
     const regex = /^[0-9]+$/;
     if(e.target.value.length <8 || e.target.value.length >12) {
-      console.log('количество цифр в номере:' + e.target.value.length);
+      // console.log('количество цифр в номере:' + e.target.value.length);
     } if (!regex.test(String(e.target.value))){
       setUserPhoneError('Некорректный формат номера')
     }
     else {
-      console.log ('number is ok')
+      // console.log ('number is ok')
       setUserPhoneError('')
     }
   }
@@ -59,6 +59,7 @@ const ModalBuyWindowHook = (props) => {
     switch (e.target.name) {
       case "name":
         setUserNameDirty(true);
+        break
       case "phone":
         setUserPhoneDirty(true);
         break;
