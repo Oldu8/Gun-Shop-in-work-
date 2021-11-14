@@ -15,15 +15,14 @@ const errorText = {
 const checkFunctions = {
   userName: (value) => {
     const regex = /[A-Za-z]+$/;
-    return !!(value.length <3 || value.length >8) && (regex.test(value));
+    return !!(value.length >3 || value.length <8) && (regex.test(value));
   }
   ,
   userPhone: (value) => {
     const regex = /^[0-9]+$/;
-    return !!(value.length <8 || value.length >12) && (regex.test(value));
+    return !!(value.length >8 && value.length <12) && (regex.test(value));
   }
 }
-
 
 const ModalBuyWindowHook = (props) => {
   const { isActive, chosenItem, closeModal } = props;
@@ -58,6 +57,8 @@ const ModalBuyWindowHook = (props) => {
   const onSubmit = (event) => {
     event.preventDefault();
     if (formData.userName && formData.userPhone && !error.length) {
+      setError([]);
+      setFormData(intialFormData)
       setTYActive(true)
     }
   }
