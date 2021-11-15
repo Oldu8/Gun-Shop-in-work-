@@ -4,7 +4,7 @@ import Header from "../header/";
 import ItemList from "../item-list/";
 import "./app.css";
 import FilterPanel from "../filter-panel";
-import ModalBuyWindowHook from "../modal-buy-window-hook";
+import ModalBuyWindow from "../modal-buy-window";
 
 const sortByParams = (arr, field, type) => {
   return type === "asc"
@@ -82,7 +82,7 @@ export default class App extends React.Component {
           products={searchedItems}
           createModalBuyWindow={(id) => createModalBuyWindow(id)}
         />
-        <ModalBuyWindowHook
+        <ModalBuyWindow
           isActive={modalBuyWindow}
           chosenItem={ItemForModal}
           closeModal={closeModalBuyWindow}
